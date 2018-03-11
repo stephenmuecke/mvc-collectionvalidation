@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -113,6 +114,11 @@ namespace Sandtrap.Web.Validation
             return (matches >= _Minimum) && (_Maximum.HasValue ? matches <= _Maximum.Value : true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public override string FormatErrorMessage(string name)
         {
             // TODO: Format message based on min and max values
@@ -122,6 +128,26 @@ namespace Sandtrap.Web.Validation
             // otherwise the message should be like "At least x items must have the _PropertyName equal to _Value ..
 
             return "This is the error";
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <returns></returns>
+        public override Dictionary<string, object> GetHtmlDataAttrbutes()
+        {
+            Dictionary<string, object> attributes = new Dictionary<string, object>
+                {
+                    { "data-collection-require", ErrorMessage },
+                    { "data-collection-require-property", _PropertyName },
+                    { "data-collection-require-value", _Value },
+                    { "data-collection-require-minimum", _Minimum },
+                };
+            if (_Maximum.HasValue)
+            {
+                attributes.Add("data-collection-require-maximum", _Maximum.Value);
+            }
+            return attributes;
         }
 
         #endregion

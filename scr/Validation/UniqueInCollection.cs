@@ -36,6 +36,10 @@ namespace Sandtrap.Web.Validation
 
         #endregion
 
+        #region .Properties 
+
+        #endregion
+
         #region .Methods 
 
         /// <summary>
@@ -84,6 +88,20 @@ namespace Sandtrap.Web.Validation
         {
             // TODO: Format message
             return "This is the error";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override Dictionary<string, object> GetHtmlDataAttrbutes()
+        {
+            Dictionary<string, object> attributes = new Dictionary<string, object>
+            {
+                { "data-collection-require", ErrorMessage },
+                { "data-collection-require-property", _PropertyName }
+            };
+            return attributes;
         }
 
         #endregion

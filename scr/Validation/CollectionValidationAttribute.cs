@@ -19,6 +19,8 @@ namespace Sandtrap.Web.Validation
 
         #region .Methods 
 
+        public abstract Dictionary<string, object> GetHtmlDataAttrbutes();
+
         protected void ValidateCollection(IEnumerable collection)
         {
             // Validate that the property the attribute is applied to is a collection
