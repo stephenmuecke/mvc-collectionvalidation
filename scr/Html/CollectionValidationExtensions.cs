@@ -10,11 +10,22 @@ using Sandtrap.Web.Validation;
 namespace Sandtrap.Web.Html
 {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static class CollectionValidationExtensions
     {
 
         #region .Methods 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="htmlHelper"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
         public static MvcHtmlString CollectionValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
         {
             return CollectionValidationMessageHelper(
@@ -25,7 +36,7 @@ namespace Sandtrap.Web.Html
                 null);
         }
 
-        // TODO: Add other overloads
+        // TODO: Add other overloads (htmlAttributes, tag)
 
         #endregion
 
@@ -59,9 +70,10 @@ namespace Sandtrap.Web.Html
             }
             if (isClientSideValidationEnabled)
             {
-                html.MergeAttribute("data-collection-message-for", propertyName);
+                
                 Dictionary<string, object> validationAttributes = GetValidationAttributes(modelMetadata);
                 html.MergeAttributes(validationAttributes);
+                html.MergeAttribute("data-col-message-for", propertyName);
             }
             return MvcHtmlString.Create(html.ToString());
         }
@@ -71,11 +83,10 @@ namespace Sandtrap.Web.Html
             Type type = metadata.ContainerType;
             PropertyInfo property = type.GetProperty(metadata.PropertyName);
             object[] customAttributes = property.GetCustomAttributes(typeof(CollectionValidationAttribute), true);
-
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>();
             foreach (CollectionValidationAttribute attribute in customAttributes)
             {
-                foreach (KeyValuePair<string, object> item in attribute.GetHtmlDataAttrbutes())
+                foreach (KeyValuePair<string, object> item in attribute.GetHtmlDataAttrbutes(metadata.DisplayName))
                 {
                     htmlAttributes.Add(item.Key, item.Value);
                 }
