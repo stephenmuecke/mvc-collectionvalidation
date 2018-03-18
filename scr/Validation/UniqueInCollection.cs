@@ -97,7 +97,7 @@ namespace Sandtrap.Web.Validation
             Dictionary<string, object> attributes = new Dictionary<string, object>
             {
                 { "data-col-unique", ErrorMessage },
-                { "data-col-unique-property", name }
+                { "data-col-unique-property", PropertyName }
             };
             return attributes;
         }
