@@ -193,11 +193,11 @@ namespace Sandtrap.Web.Validation
         public override Dictionary<string, object> GetHtmlDataAttrbutes(string name)
         {
             CheckMinMax();
-            string errorMessage = FormatErrorMessage(PropertyName);
+            string errorMessage = FormatErrorMessage(name);
             object requiredValue = RequiredValue is bool ? RequiredValue.ToString().ToLower() : RequiredValue;
             Dictionary<string, object> attributes = new Dictionary<string, object>();
             attributes.Add("data-col-require", errorMessage);
-            attributes.Add("data-col-require-property", name);
+            attributes.Add("data-col-require-property", PropertyName);
             attributes.Add("data-col-require-value", requiredValue);
             attributes.Add("data-col-require-minimum", Minimum);
             if (_Maximum.HasValue)
