@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace Sandtrap.Web.Validation
 {
@@ -28,10 +29,6 @@ namespace Sandtrap.Web.Validation
 
         #region .Methods 
 
-        // TODO: Should we also pass the model (as IEnumerable collection) to this so that
-        // we can call CheckCollection() and validate the arguments?
-        // If not, do extra checking in the script
-
         /// <summary>
         /// Returns a Dictionary containing the name/value pairs used to generate the
         /// html data-* attributes used for client side validation.
@@ -39,7 +36,7 @@ namespace Sandtrap.Web.Validation
         /// <param name="name">
         /// The fully qualified name of the property the attribute is applied to.
         /// </param>
-        public abstract Dictionary<string, object> GetHtmlDataAttributes(string name);
+        public abstract Dictionary<string, object> GetHtmlDataAttributes(ModelMetadata metadata);
 
         /// <summary>
         /// Checks that the property the attribute is applied to is a collection, and that the

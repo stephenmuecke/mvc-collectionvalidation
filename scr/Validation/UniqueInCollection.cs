@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Web.Mvc;
 
 namespace Sandtrap.Web.Validation
 {
@@ -84,7 +86,7 @@ namespace Sandtrap.Web.Validation
             // If we got here, all values are unique;
             return true;
         }
-        
+
         /// <summary>
         /// Override of <see cref="ValidationAttribute.FormatErrorMessage"/>
         /// </summary>
@@ -99,17 +101,18 @@ namespace Sandtrap.Web.Validation
             return string.Format(ErrorMessage, name, PropertyName);
         }
 
-
         /// <summary>
         /// Returns a Dictionary containing the name/value pairs used to generate the
         /// html data-* attributes used for client side validation.
         /// </summary>
-        /// <param name="name">
-        /// The fully qualified name of the property the attribute is applied to.
+        /// <param name="metadata">
+        /// The metadata of the collection.
         /// </param>
-        public override Dictionary<string, object> GetHtmlDataAttributes(string name)
+        public override Dictionary<string, object> GetHtmlDataAttributes(ModelMetadata metadata)
         {
-            string errorMessage = FormatErrorMessage(name);
+            // Validate attribute
+            CheckCollection(metadata.Model as IEnumerable);
+            string errorMessage = FormatErrorMessage(metadata.GetDisplayName());
             Dictionary<string, object> attributes = new Dictionary<string, object>
             {
                 { "data-col-unique", errorMessage },

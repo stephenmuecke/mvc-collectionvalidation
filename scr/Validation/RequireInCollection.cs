@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using System.Web.Mvc;
 
 namespace Sandtrap.Web.Validation
 {
@@ -183,17 +184,19 @@ namespace Sandtrap.Web.Validation
         /// Returns a Dictionary containing the name/value pairs used to generate the
         /// html data-* attributes used for client side validation.
         /// </summary>
-        /// <param name="name">
-        /// The fully qualified name of the property the attribute is applied to.
+        /// <param name="metadata">
+        /// The metadata of the collection.
         /// </param>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// is thrown is the <see cref="Minimum"/> is less than 1, 
+        /// is thrown if the <see cref="Minimum"/> is less than 1, 
         /// or if <see cref="Maximum"/> is less than <see cref="Minimum"/>
         /// </exception>
-        public override Dictionary<string, object> GetHtmlDataAttributes(string name)
+        public override Dictionary<string, object> GetHtmlDataAttributes(ModelMetadata metadata)
         {
+            // Validate attributes
+            CheckCollection(metadata.Model as IEnumerable);
             CheckMinMax();
-            string errorMessage = FormatErrorMessage(name);
+            string errorMessage = FormatErrorMessage(metadata.GetDisplayName());
             object requiredValue = RequiredValue is bool ? RequiredValue.ToString().ToLower() : RequiredValue;
             Dictionary<string, object> attributes = new Dictionary<string, object>();
             attributes.Add("data-col-require", errorMessage);
