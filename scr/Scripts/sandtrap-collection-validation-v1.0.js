@@ -100,7 +100,7 @@
     // Asserts that a property of an object in a collection must have a unique value
     uniqueValidator = function (element) {
         this.element = element;
-        this.errorMessage = $(element).data('col-require');
+        this.errorMessage = $(element).data('col-unique');
 
         // Get the form controls to validate
         var prefix = $(element).data('col-message-for');
