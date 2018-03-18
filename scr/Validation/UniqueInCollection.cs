@@ -107,7 +107,7 @@ namespace Sandtrap.Web.Validation
         /// <param name="name">
         /// The fully qualified name of the property the attribute is applied to.
         /// </param>
-        public override Dictionary<string, object> GetHtmlDataAttrbutes(string name)
+        public override Dictionary<string, object> GetHtmlDataAttributes(string name)
         {
             string errorMessage = FormatErrorMessage(name);
             Dictionary<string, object> attributes = new Dictionary<string, object>
