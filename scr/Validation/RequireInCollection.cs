@@ -190,7 +190,7 @@ namespace Sandtrap.Web.Validation
         /// is thrown is the <see cref="Minimum"/> is less than 1, 
         /// or if <see cref="Maximum"/> is less than <see cref="Minimum"/>
         /// </exception>
-        public override Dictionary<string, object> GetHtmlDataAttrbutes(string name)
+        public override Dictionary<string, object> GetHtmlDataAttributes(string name)
         {
             CheckMinMax();
             string errorMessage = FormatErrorMessage(name);
