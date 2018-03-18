@@ -86,7 +86,7 @@ namespace Sandtrap.Web.Html
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>();
             foreach (CollectionValidationAttribute attribute in customAttributes)
             {
-                foreach (KeyValuePair<string, object> item in attribute.GetHtmlDataAttributes(metadata.GetDisplayName()))
+                foreach (KeyValuePair<string, object> item in attribute.GetHtmlDataAttributes(metadata))
                 {
                     htmlAttributes.Add(item.Key, item.Value);
                 }
