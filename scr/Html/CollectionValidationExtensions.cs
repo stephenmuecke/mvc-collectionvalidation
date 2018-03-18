@@ -36,7 +36,44 @@ namespace Sandtrap.Web.Html
                 null);
         }
 
-        // TODO: Add other overloads (htmlAttributes, tag)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="htmlHelper"></param>
+        /// <param name="expression"></param>
+        /// <param name="htmlAttributes"></param>
+        /// <returns></returns>
+        public static MvcHtmlString CollectionValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes)
+        {
+            return CollectionValidationMessageHelper(
+                htmlHelper,
+                ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
+                ExpressionHelper.GetExpressionText(expression),
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                null);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TProperty"></typeparam>
+        /// <param name="htmlHelper"></param>
+        /// <param name="expression"></param>
+        /// <param name="htmlAttributes"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public static MvcHtmlString CollectionValidationMessageFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, object htmlAttributes, string tag)
+        {
+            return CollectionValidationMessageHelper(
+                htmlHelper,
+                ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData),
+                ExpressionHelper.GetExpressionText(expression),
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
+                tag);
+        }
 
         #endregion
 
