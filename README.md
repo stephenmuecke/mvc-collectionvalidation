@@ -40,5 +40,7 @@ The default element is `<span>`.
 
 ### jQuery plugin
 
+The `sandtrap-collection-validation.js` plugin is responsible for client side validation.
 
+Client side validation is 'lazy'. It is not triggered until the form is first submitted. If the data is not valid, the submit is cancelled and error messages are displayed. Thereafter, validation is triggered on the `.change()` event of the appropriate form controls so that error messages are removed as soon as the data is valid.
 
