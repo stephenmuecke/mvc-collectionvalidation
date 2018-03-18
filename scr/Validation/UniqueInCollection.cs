@@ -84,6 +84,21 @@ namespace Sandtrap.Web.Validation
             // If we got here, all values are unique;
             return true;
         }
+        
+        /// <summary>
+        /// Override of <see cref="ValidationAttribute.FormatErrorMessage"/>
+        /// </summary>
+        /// <param name="name">
+        /// The name to of the collection property the attribute is applied to.
+        /// </param>
+        /// <returns>
+        /// A localized string to describe the requirement.
+        /// </returns>
+        public override string FormatErrorMessage(string name)
+        {
+            return string.Format(ErrorMessage, name, PropertyName);
+        }
+
 
         /// <summary>
         /// Returns a Dictionary containing the name/value pairs used to generate the
@@ -94,9 +109,10 @@ namespace Sandtrap.Web.Validation
         /// </param>
         public override Dictionary<string, object> GetHtmlDataAttrbutes(string name)
         {
+            string errorMessage = FormatErrorMessage(name);
             Dictionary<string, object> attributes = new Dictionary<string, object>
             {
-                { "data-col-unique", ErrorMessage },
+                { "data-col-unique", errorMessage },
                 { "data-col-unique-property", PropertyName }
             };
             return attributes;
