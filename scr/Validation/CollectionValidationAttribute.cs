@@ -39,7 +39,7 @@ namespace Sandtrap.Web.Validation
         /// <param name="name">
         /// The fully qualified name of the property the attribute is applied to.
         /// </param>
-        public abstract Dictionary<string, object> GetHtmlDataAttrbutes(string name);
+        public abstract Dictionary<string, object> GetHtmlDataAttributes(string name);
 
         /// <summary>
         /// Checks that the property the attribute is applied to is a collection, and that the
