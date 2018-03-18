@@ -34,6 +34,10 @@ Asserts that the total of a specified property of the object in the collection m
 
 ### HtmlHelper
 
+The `@Html.CollectionValidationMessageFor()` extension method is used to generate the placeholder element in the view to display the error message if the the collection property is invalid (the equivalent if `@Html.ValidationMessageFor()`).
+
+The default element is `<span>`.
+
 ### jQuery plugin
 
 
