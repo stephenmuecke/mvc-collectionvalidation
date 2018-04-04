@@ -74,7 +74,7 @@ namespace Sandtrap.Web.Validation
                 // TODO: Add to resource file
                 string errMsg = "'{0}' does not contain a property named '{2}'";
                 string errorMessage = String.Format(errMsg, type.Name, PropertyName);
-                throw new ArgumentException(errMsg);
+                throw new ArgumentException(errorMessage);
             }
         }
 
